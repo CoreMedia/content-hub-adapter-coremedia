@@ -169,7 +169,7 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
             .filter(Objects::nonNull)
             .filter(Content::isReadable)
             .filter(c -> !ignoredTypes.contains(c.getType().getName()))
-            .map(c -> (IdHelper.parseContentId(c.getId()) % 2 == 0) ?
+            .map(c -> (c.isDocument()) ?
                     new CoreMediaItem(c, folder.getId()) :
                     new CoreMediaFolder(c, folder.getId()))
             .collect(Collectors.toList());
