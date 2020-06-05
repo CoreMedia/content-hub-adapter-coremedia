@@ -1,4 +1,4 @@
-# <PROJECT_NAME> Manual
+# content-hub-adapter-coremedia Manual
 
 ## Table of Contents
 
