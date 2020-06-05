@@ -1,8 +1,5 @@
 package com.coremedia.blueprint.contenthub.adapters.coremedia;
 
-/**
- *
- */
 interface CoreMediaContentHubConfiguration {
   String getUsername();
   String getPassword();

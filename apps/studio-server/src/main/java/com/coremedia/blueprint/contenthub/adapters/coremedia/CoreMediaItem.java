@@ -1,6 +1,5 @@
 package com.coremedia.blueprint.contenthub.adapters.coremedia;
 
-
 import com.coremedia.cap.common.UrlBlob;
 import com.coremedia.cap.content.Content;
 import com.coremedia.contenthub.api.ContentHubBlob;
@@ -18,6 +17,17 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 class CoreMediaItem extends CoreMediaContentHubObject implements Item {
+
+  private static final String MAIN = "main";
+  private static final String DATA_PROPERTY = "data";
+  private static final String NAME = "name";
+  private static final String ID = "id";
+  private static final String TYPE = "type";
+  private static final String LAST_MODIFIED = "lastModified";
+  private static final String METADATA = "metadata";
+  private static final String PREVIEW = "preview";
+  private static final String CM_PICTURE = "CMPicture";
+
   CoreMediaItem(Content content, ContentHubObjectId id) {
     super(content, id);
   }
@@ -25,43 +35,43 @@ class CoreMediaItem extends CoreMediaContentHubObject implements Item {
   @Nullable
   @Override
   public String getDescription() {
-    return content.getPath();
+    return getContent().getPath();
   }
 
   @NonNull
   @Override
   public ContentHubType getContentHubType() {
-    return new ContentHubType(content.getType().getName());
+    return new ContentHubType(getContent().getType().getName());
   }
 
   @NonNull
   @Override
   public String getCoreMediaContentType() {
-    return content.getType().getName();
+    return getContent().getType().getName();
   }
 
   @NonNull
   @Override
   public List<DetailsSection> getDetails() {
-    if (content.getType().getName().equals("CMPicture")){
+    if (getContent().getType().getName().equals(CM_PICTURE)) {
       return pictureDetails();
     }
     return contentDetails();
   }
 
   private List<DetailsSection> contentDetails() {
-    List<DetailsElement<?>> elements = List.of(new DetailsElement<>(content.getName(), SHOW_TYPE_ICON));
-    return List.of(new DetailsSection("main", elements, false, false , false), getMetaDataSection());
+    List<DetailsElement<?>> elements = List.of(new DetailsElement<>(getContent().getName(), SHOW_TYPE_ICON));
+    return List.of(new DetailsSection(MAIN, elements, false, false, false), getMetaDataSection());
   }
 
   private List<DetailsSection> pictureDetails() {
-    ContentHubBlob picture = new UrlBlobBuilder(this, "preview").withUrl(getUrlBlob().getUrl()).withEtag().build();
-    List<DetailsElement<?>> elements = List.of(new DetailsElement<>(content.getName(), false, picture));
-    return List.of(new DetailsSection("main", elements, false, false, false), getMetaDataSection());
+    ContentHubBlob picture = new UrlBlobBuilder(this, PREVIEW).withUrl(getUrlBlob().getUrl()).withEtag().build();
+    List<DetailsElement<?>> elements = List.of(new DetailsElement<>(getContent().getName(), false, picture));
+    return List.of(new DetailsSection(MAIN, elements, false, false, false), getMetaDataSection());
   }
 
   private UrlBlob getUrlBlob() {
-    return (UrlBlob) content.get("data");
+    return (UrlBlob) getContent().get(DATA_PROPERTY);
   }
 
   @Nullable
@@ -72,11 +82,11 @@ class CoreMediaItem extends CoreMediaContentHubObject implements Item {
 
   @NonNull
   private DetailsSection getMetaDataSection() {
-    return new DetailsSection("metadata", List.of(
-            new DetailsElement<>("name", content.getName()),
-            new DetailsElement<>("id", content.getId()),
-            new DetailsElement<>("type", content.getType().getName()),
-            new DetailsElement<>("lastModified", content.getModificationDate())
+    return new DetailsSection(METADATA, List.of(
+            new DetailsElement<>(NAME, getContent().getName()),
+            new DetailsElement<>(ID, getContent().getId()),
+            new DetailsElement<>(TYPE, getContent().getType().getName()),
+            new DetailsElement<>(LAST_MODIFIED, getContent().getModificationDate())
     ).stream().filter(p -> Objects.nonNull(p.getValue())).collect(Collectors.toUnmodifiableList()));
   }
 }

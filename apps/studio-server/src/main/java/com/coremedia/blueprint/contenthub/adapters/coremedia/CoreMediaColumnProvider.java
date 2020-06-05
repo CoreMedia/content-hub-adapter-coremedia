@@ -18,13 +18,18 @@ import java.util.List;
  */
 class CoreMediaColumnProvider extends DefaultColumnProvider {
 
+  public static final String CREATED = "created";
+  public static final String STATUS = "status";
+  public static final String PUBLISH = "publish";
+  public static final String EDITED_BY_USER = "edited_by_user";
+
   @NonNull
   @Override
   public List<Column> getColumns(Folder folder) {
     List<Column> columns = new ArrayList<>(super.getColumns(folder));
     //we should set at least one column to flex, so the collection view's width will be filled.
-    columns.add(new Column("created", "created", 150, -1));
-    columns.add(new Column("status", "status", 100, -1));
+    columns.add(new Column(CREATED, CREATED, 150, -1));
+    columns.add(new Column(STATUS, STATUS, 100, -1));
     return columns;
   }
 
@@ -36,8 +41,8 @@ class CoreMediaColumnProvider extends DefaultColumnProvider {
     String lifecycle = getLifecycle(content);
 
     List<ColumnValue> columnValues = new ArrayList<>(super.getColumnValues(hubObject));
-    columnValues.add(new ColumnValue("status", null, lifecycle, lifecycle));
-    columnValues.add(new ColumnValue("created", content.getCreationDate(), null, null));
+    columnValues.add(new ColumnValue(STATUS, null, lifecycle, lifecycle));
+    columnValues.add(new ColumnValue(CREATED, content.getCreationDate(), null, null));
 
     return columnValues;
   }
@@ -46,18 +51,16 @@ class CoreMediaColumnProvider extends DefaultColumnProvider {
     ContentRepository repository = content.getRepository();
     //assume we have a MLS connection
     if (repository.isMasterLiveServer() || repository.isLiveServer()) {
-      return "publish";
+      return PUBLISH;
     }
-
     Version checkedInVersion = content.getCheckedInVersion();
     if (checkedInVersion != null) {
       if (repository.getPublicationService().isPublished(checkedInVersion)) {
-        return "publish";
+        return PUBLISH;
       }
     }
-
     if (content.isCheckedOut()) {
-      return "edited_by_user";
+      return EDITED_BY_USER;
     }
     return null;
   }

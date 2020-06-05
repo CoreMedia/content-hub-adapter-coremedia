@@ -5,9 +5,6 @@ import com.coremedia.contenthub.api.ContentHubAdapter;
 import com.coremedia.contenthub.api.ContentHubAdapterFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
-/**
- *
- */
 class CoreMediaContentHubAdapterFactory implements ContentHubAdapterFactory<CoreMediaContentHubConfiguration> {
   private ContentRepository contentRepository;
 
@@ -18,7 +15,7 @@ class CoreMediaContentHubAdapterFactory implements ContentHubAdapterFactory<Core
   @Override
   @NonNull
   public String getId() {
-    return "coremdia";
+    return "coremedia";
   }
 
   @Override

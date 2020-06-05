@@ -122,7 +122,6 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
       if (parent.equals(rootContent)) {
         return getRootFolder(context);
       }
-
       ContentHubObjectId parentId = new ContentHubObjectId(connectionId, parent.getId());
       return new CoreMediaFolder(parent, parentId);
     } else {
@@ -159,7 +158,6 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
   private ContentType contentHubTypeAsContentType(@Nullable ContentHubType type) {
     return type == null ? null : repository.getContentType(type.getName());
   }
-
 
   @Override
   public GetChildrenResult getChildren(ContentHubContext contentHubContext, Folder folder, @Nullable PaginationRequest paginationRequest) {

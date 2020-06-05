@@ -11,7 +11,7 @@ abstract class CoreMediaContentHubObject implements ContentHubObject {
   private ContentHubObjectId hubId;
   private String name;
 
-  Content content;
+  private Content content;
 
   CoreMediaContentHubObject(Content content, ContentHubObjectId hubId) {
     this.hubId = hubId;
@@ -28,11 +28,6 @@ abstract class CoreMediaContentHubObject implements ContentHubObject {
   public String getName() {
     return name;
   }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
 
   @NonNull
   @Override
