@@ -1,4 +1,4 @@
-package com.coremedia;
+package com.coremedia.blueprint.contenthub.adapters.coremedia;
 
 import com.coremedia.cap.Cap;
 import com.coremedia.cap.common.CapConnection;

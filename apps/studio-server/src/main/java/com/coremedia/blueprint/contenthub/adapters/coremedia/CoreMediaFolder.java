@@ -1,4 +1,4 @@
-package com.coremedia;
+package com.coremedia.blueprint.contenthub.adapters.coremedia;
 
 import com.coremedia.cap.content.Content;
 import com.coremedia.contenthub.api.ContentHubObjectId;
