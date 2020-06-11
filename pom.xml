@@ -19,7 +19,7 @@
   </properties>
 
   <modules>
-    <module>apps/studio-server</module>
+    <module>studio-server.content-hub-adapter-coremedia</module>
   </modules>
 
   <build>
