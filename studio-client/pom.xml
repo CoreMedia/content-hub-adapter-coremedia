@@ -14,7 +14,6 @@
 
   <properties>
     <coremedia.project.extension.for>studio-dynamic</coremedia.project.extension.for>
-    <jangaroo.version>4.0.69</jangaroo.version>
   </properties>
 
   <description>Studio Plugin for the Content Hub's Rss Adapter</description>
