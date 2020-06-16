@@ -2,7 +2,6 @@ package com.coremedia.blueprint.contenthub.adapters.coremedia;
 
 import com.coremedia.cap.Cap;
 import com.coremedia.cap.common.CapConnection;
-import com.coremedia.cap.common.IdHelper;
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.content.ContentType;
@@ -70,7 +69,7 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
 
       rootContent = StringUtils.isEmpty(path) ? repository.getRoot() : repository.getChild(path);
       rootId = new ContentHubObjectId(connectionId, rootContent.getId());
-      rootFolder = new CoreMediaFolder(rootContent, rootId, new ContentHubType(rootContent.getType().getName()));
+      rootFolder = new CoreMediaFolder(rootContent, rootId);
 
       String ignoredTypesString = settings.getIgnoredTypes();
       if (!StringUtils.isEmpty(ignoredTypesString)) {
@@ -102,7 +101,7 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
   public Folder getFolder(@NonNull ContentHubContext context, @NonNull ContentHubObjectId id) {
     String capId = id.getExternalId();
     Content content = repository.getContent(capId);
-    return rootContent.equals(content) ? getRootFolder(context) : new CoreMediaFolder(content, id);
+    return rootContent.equals(content) ? rootFolder : new CoreMediaFolder(content, id);
   }
 
   @Nullable
@@ -163,15 +162,15 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
   public GetChildrenResult getChildren(ContentHubContext contentHubContext, Folder folder, @Nullable PaginationRequest paginationRequest) {
     CoreMediaContentHubObject item = (CoreMediaContentHubObject) folder;
     Set<Content> children = item.getContent().getChildren();
-
+    String connectionId = item.getId().getConnectionId();
     List<ContentHubObject> hubList = children
             .stream()
             .filter(Objects::nonNull)
             .filter(Content::isReadable)
             .filter(c -> !ignoredTypes.contains(c.getType().getName()))
             .map(c -> (c.isDocument()) ?
-                    new CoreMediaItem(c, folder.getId()) :
-                    new CoreMediaFolder(c, folder.getId()))
+                    new CoreMediaItem(c, new ContentHubObjectId(connectionId, c.getId())) :
+                    new CoreMediaFolder(c, new ContentHubObjectId(connectionId, c.getId())))
             .collect(Collectors.toList());
 
     return new GetChildrenResult(hubList);

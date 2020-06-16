@@ -4,6 +4,7 @@ package com.coremedia.blueprint.contenthub.adapters.coremedia;
 import com.coremedia.cap.content.Content;
 import com.coremedia.contenthub.api.ContentHubObject;
 import com.coremedia.contenthub.api.ContentHubObjectId;
+import com.coremedia.contenthub.api.ContentHubType;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
 abstract class CoreMediaContentHubObject implements ContentHubObject {
@@ -19,7 +20,13 @@ abstract class CoreMediaContentHubObject implements ContentHubObject {
     this.name = content.getName();
   }
 
-  public Content getContent() {
+  @NonNull
+  @Override
+  public ContentHubType getContentHubType() {
+    return new ContentHubType(getContent().getType().getName());
+  }
+
+  Content getContent() {
     return content;
   }
 

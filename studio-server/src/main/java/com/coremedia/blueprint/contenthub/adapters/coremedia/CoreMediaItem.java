@@ -4,7 +4,6 @@ import com.coremedia.cap.common.UrlBlob;
 import com.coremedia.cap.content.Content;
 import com.coremedia.contenthub.api.ContentHubBlob;
 import com.coremedia.contenthub.api.ContentHubObjectId;
-import com.coremedia.contenthub.api.ContentHubType;
 import com.coremedia.contenthub.api.Item;
 import com.coremedia.contenthub.api.UrlBlobBuilder;
 import com.coremedia.contenthub.api.preview.DetailsElement;
@@ -36,12 +35,6 @@ class CoreMediaItem extends CoreMediaContentHubObject implements Item {
   @Override
   public String getDescription() {
     return getContent().getPath();
-  }
-
-  @NonNull
-  @Override
-  public ContentHubType getContentHubType() {
-    return new ContentHubType(getContent().getType().getName());
   }
 
   @NonNull
