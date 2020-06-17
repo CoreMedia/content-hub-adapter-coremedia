@@ -62,13 +62,13 @@ in Studio with the struct editor by pressing "add Item to ListProperty". The tab
 
 | Key           | Type       | Value                 | Required   |
 |---------------|------------|------------           |------------|
-| connectionId  | String      | coremedia            | Yes        |
-| factoryId     | String      | <YOUR_CHOOSEN_ID>    | Yes        |
+| connectionId  | String      | <YOUR_CHOOSEN_ID>    | Yes        |
+| factoryId     | String      | coremedia            | Yes        |
 | enabled       | Boolean     | true or false        | Yes        |
 | settings       | Struct     |                      | Yes        |
           
 
-#### Required configuration
+#### Required / optional configuration
 In section [Basic structure](#basic-structure) and according to the table, the settings struct is currently empty.
 The settings struct itself is holding specific configuration options for the connector (common to all connectors).
 The table below is depicting all potentional entries. 
