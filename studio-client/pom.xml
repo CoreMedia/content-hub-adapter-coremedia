@@ -9,6 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
+  <groupId>com.coremedia.contenthub.adapters.coremedia</groupId>
   <artifactId>studio-client.content-hub-adapter-coremedia</artifactId>
   <packaging>swc</packaging>
 

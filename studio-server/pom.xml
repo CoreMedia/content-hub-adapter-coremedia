@@ -9,8 +9,9 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
+  <groupId>com.coremedia.contenthub.adapters.coremedia</groupId>
   <artifactId>studio-server.content-hub-adapter-coremedia</artifactId>
-  <name>content-hub-adapter-coremedia</name>
+
   <properties>
     <coremedia.project.extension.for>studio-lib</coremedia.project.extension.for>
   </properties>

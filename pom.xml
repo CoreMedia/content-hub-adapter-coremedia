@@ -12,11 +12,7 @@
 
   <artifactId>content-hub-adapter-coremedia</artifactId>
   <packaging>pom</packaging>
-  <groupId>com.coremedia.contenthub</groupId>
-  <version>1.0-SNAPSHOT</version>
-  <properties>
-    <workspace.configuration.dir>../../../../workspace-configuration</workspace.configuration.dir>
-  </properties>
+  <groupId>com.coremedia.contenthub.adapters.coremedia</groupId>
 
   <modules>
     <module>studio-server</module>

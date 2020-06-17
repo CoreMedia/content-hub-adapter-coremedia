@@ -15,11 +15,6 @@ If a project is inactive it means that the development has been discontinued and
 The content-hub-adapter-coremedia extension is providing access to a "to be configurable" CoreMedia repository. 
 The repository data is after successfully configuring the content-hub-adapter available as an additional tree inside the studio instance.
 
-
-## Versioning
-
-To find out which CoreMedia versions are `supported by this project, please take look at the releases section or on the existing branches. To find the matching version of your CoreMedia system, please checkout the branch with the corresponding name. For example, if your CoreMedia version is 2001.2, checkout the branch 2001.2.
-
 ## Documentation & Tutorial
 
 
