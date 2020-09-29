@@ -9,11 +9,14 @@ Please read the versioning section of the project to see what other CoreMedia ve
 If a project is inactive it means that the development has been discontinued and won't support future CoreMedia versions."
 )
 
-# content-hub-adapter-coremedia
+# Content Hub Adapter for a CoreMedia Repository
 
-## Abstract
-The content-hub-adapter-coremedia extension is providing access to a "to be configurable" CoreMedia repository. 
-The repository data is after successfully configuring the content-hub-adapter available as an additional tree inside the studio instance.
+The **content-hub-adapter-coremedia** extension is providing access to a "to be configurable" CoreMedia repository. 
+The repository data is, after successfully configuration the content-hub-adapter, available as an additional tree inside the studio instance.
+
+## Versioning
+
+To find out which CoreMedia versions are supported by this project, please take look at the releases section or on the existing branches. To find the matching version of your CoreMedia system, please checkout the branch with the corresponding name. For example, if your CoreMedia version is 2007.2, checkout the branch cmcc-10-2007.
 
 ## Documentation & Tutorial
 
@@ -26,7 +29,7 @@ The repository data is after successfully configuring the content-hub-adapter av
 
     for recent changes
 
-* **[Issues](https://github.com/CoreMedia/<PROJECT_REPO>/issues)**
+* **[Issues](https://github.com/CoreMedia/content-hub-adapter-coremedia/issues)**
 
     for known bugs and feature requests
 
