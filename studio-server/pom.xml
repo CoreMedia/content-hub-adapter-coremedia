@@ -12,21 +12,26 @@
   <groupId>com.coremedia.contenthub.adapters.coremedia</groupId>
   <artifactId>studio-server.content-hub-adapter-coremedia</artifactId>
 
-  <properties>
-    <coremedia.project.extension.for>studio-lib</coremedia.project.extension.for>
-  </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.coremedia.cms</groupId>
+      <artifactId>coremedia-plugin-pluginbeans-plugin</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>com.coremedia.content-hub</groupId>
       <artifactId>content-hub-api</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>cap-unified-api</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>cap-unified-api-boot</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
@@ -37,10 +42,12 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -59,6 +66,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <build>
@@ -76,6 +84,25 @@
               <failOnWarning>true</failOnWarning>
               <ignoreNonCompile>true</ignoreNonCompile>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <descriptors>
+            <descriptor>src/assembly/descriptor.xml</descriptor>
+          </descriptors>
+          <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-plugin</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
