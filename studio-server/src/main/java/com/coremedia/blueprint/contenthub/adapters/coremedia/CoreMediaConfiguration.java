@@ -1,16 +1,12 @@
 package com.coremedia.blueprint.contenthub.adapters.coremedia;
 
-import com.coremedia.cap.common.CapConnection;
 import com.coremedia.cap.content.ContentRepository;
-import com.coremedia.cms.common.plugins.pluginbeans.plugin.CapConnectionPluginBeansPluginConfiguration;
 import com.coremedia.contenthub.api.ContentHubAdapterFactory;
 import com.coremedia.contenthub.api.column.ColumnProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({CapConnectionPluginBeansPluginConfiguration.class})
 public class CoreMediaConfiguration {
   @Bean
   public ColumnProvider coreMediaContentHubColumnModelProvider() {
@@ -18,8 +14,8 @@ public class CoreMediaConfiguration {
   }
 
   @Bean
-  public ContentHubAdapterFactory coreMediaContentHubAdapterFactory(CapConnection capConnection) {
-    ContentRepository contentRepository = capConnection.getContentRepository();
+  public ContentHubAdapterFactory coreMediaContentHubAdapterFactory(PluginBeans pluginBeans) {
+    ContentRepository contentRepository = pluginBeans.getCapConnection().getContentRepository();
     return new CoreMediaContentHubAdapterFactory(contentRepository);
   }
 }
