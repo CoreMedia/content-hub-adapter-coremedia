@@ -50,7 +50,7 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
   private final String connectionId;
   private final CoreMediaColumnProvider coreMediaColumnProvider;
 
-  CoreMediaContentHubAdapter(@NonNull CoreMediaContentHubConfiguration settings, String connectionId, ContentRepository contentRepository) {
+  CoreMediaContentHubAdapter(@NonNull CoreMediaContentHubConfiguration settings, String connectionId) {
     this.connectionId = connectionId;
     this.coreMediaColumnProvider = new CoreMediaColumnProvider();
     try {
@@ -60,13 +60,10 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
       String path = settings.getPath();
 
       if (StringUtils.isEmpty(ior)) {
-        LOG.warn("No 'ior' configuration found for connection '{}', using system repository as fallback.", connectionId);
-        this.repository = contentRepository;
-      } else {
-        CapConnection con = Cap.connect(ior, username, pwd);
-        repository = con.getContentRepository();
+        throw new IllegalStateException("No 'ior' configuration found for connection '" + connectionId + "'!");
       }
-
+      CapConnection con = Cap.connect(ior, username, pwd);
+      repository = con.getContentRepository();
       rootContent = StringUtils.isEmpty(path) ? repository.getRoot() : repository.getChild(path);
       rootId = new ContentHubObjectId(connectionId, rootContent.getId());
       rootFolder = new CoreMediaFolder(rootContent, rootId);
