@@ -10,9 +10,10 @@
     <version>1-SNAPSHOT</version>
   </parent>
 
+  <groupId>com.coremedia.blueprint.contenthub</groupId>
   <artifactId>content-hub-adapter-coremedia</artifactId>
+  <version>1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <groupId>com.coremedia.contenthub.adapters.coremedia</groupId>
 
   <modules>
     <module>studio-server</module>

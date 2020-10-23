@@ -2,14 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>studio-client.blueprint-parent</artifactId>
     <groupId>com.coremedia.blueprint</groupId>
     <version>1-SNAPSHOT</version>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.coremedia.contenthub.adapters.coremedia</groupId>
+  <groupId>com.coremedia.blueprint.contenthub</groupId>
   <artifactId>studio-client.content-hub-adapter-coremedia</artifactId>
   <packaging>swc</packaging>
 
