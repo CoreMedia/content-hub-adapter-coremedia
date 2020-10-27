@@ -2,15 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <groupId>com.coremedia.blueprint</groupId>
-    <artifactId>studio-server.blueprint-parent</artifactId>
-    <version>1-SNAPSHOT</version>
-  </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.coremedia.contenthub.adapters.coremedia</groupId>
   <artifactId>studio-server.content-hub-adapter-coremedia</artifactId>
+  <version>1-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.coremedia.cms</groupId>
+        <artifactId>studio-server-core-bom</artifactId>
+        <version>1-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -23,22 +36,7 @@
       <artifactId>cap-unified-api</artifactId>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>com.coremedia.cms</groupId>
-      <artifactId>cap-unified-api-boot</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.coremedia.cms</groupId>
-      <artifactId>cap-rest-plugins</artifactId>
-      <scope>provided</scope>
-    </dependency>
     <!-- THIRD-PARTY dependencies -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <scope>provided</scope>
-    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -47,11 +45,7 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <scope>provided</scope>
+      <version>3.11</version>
     </dependency>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
@@ -64,11 +58,19 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.2</version>
         <executions>
           <execution>
             <id>analyze-dependencies</id>
@@ -77,11 +79,12 @@
             </goals>
             <configuration>
               <failOnWarning>true</failOnWarning>
-              <ignoreNonCompile>true</ignoreNonCompile>
+              <ignoreNonCompile>false</ignoreNonCompile>
             </configuration>
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.3.0</version>
