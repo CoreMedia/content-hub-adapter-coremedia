@@ -14,18 +14,14 @@
 
 ## Documentation Update
 
-* Ensure you have built the CMCC version (snapshot versions) which this
-    workspace dedicates to. Otherwise, the third-party versions won't
-    match the declared CMCC version (most third-party dependencies)
-    are managed in Blueprint and CMCC Core.
-
-* Update [THIRD-PARTY.txt](../THIRD-PARTY.txt) and license downloads either manually or by running if you are using Maven and Java:
+* Update [THIRD-PARTY.txt](../THIRD-PARTY.txt) and license downloads either
+manually or by running if you are using Maven and Java:
 
     ```bash
     $ mvn -Pdocs-third-party generate-resources
     ```
   
-  Your extensions root POM has to contain the following configuration to make this work:
+  Your plugin root POM has to contain the following configuration to make this work:
   
   ```xml
     <build>
@@ -80,54 +76,16 @@
   ```
 
 * Update badges at main workspace `README.md`.
-    
-## Release Steps
 
-> **Depending on your [branch model](contribute.md#-branches-and-tags) and your requirements you do not necessarily need to build releases. Releases can also be built by means of GitHub. Not having to build releases is certainly easier. At the same time they make it easier to identify which changes have been made in which version to find the best version for the corresponding project workspace.** 
->
-> Assuming all branches (master, develop, ci/develop) already exist, proceed as follows:
->
-> ```bash
-> $ git clone https://github.com/CoreMedia/content-hub-adapter-coremedia.git
-> $ cd content-hub-adapter-coremedia
-> $ git checkout --track "origin/develop"
-> # ... perform required updates ...
-> $ git commit --all --message="Fixed #1"
-> # ... perform required updates ...
-> $ git commit --all --message="Update #2"
-> $ git push origin develop 
-> $ git checkout --track "origin/ci/develop"
-> $ git rebase "origin/develop"
-> $ git push origin "ci/develop" --force-with-lease
-> 
-> ### It is recommended to leave "ci/develop" immediately, as no other commits
-> ### must make it to this branch than those required to run it in CoreMedia CI!
-> 
-> $ git checkout develop
-> ```
-> 
-> Prior to releasing, ensure to update documentation links and third-party reports
-> (see [Documentation Update](#documentation-update)) and to adapt the `CHANGELOG.md`.
-> 
-> The structure of tags is as follows:
-> 
-> ```text
-> <CMCC_VERSION>-<PROJECT_VERSION>
-> ```
-> 
-> Thus, `1907.1-1` signals compatibility with CMCC 1907.1 and is the first
-> version of this extension. `1907.1-2` is a patch version for
-> version `1907.1-1`, which is based on the same CMCC version, but for example
-> contains bug fixes.
-> 
-> 
-> ```bash
-> $ git checkout master
-> $ git merge "origin/develop"
-> $ git push origin master
-> $ git tag "1910.1-1"
-> $ git push origin "1910.1-1"
-> ```
+* Describe the changes since the last release in `CHANGELOG.md`.
+
+* If this release is not compatible with older CMCC versions, create a new
+maintenance branch for those versions.  Branch from the state of the last release,
+and name the branch after the oldest compatible CMCC version, e.g. `cmcc-10-2010`.
+
+* Once the state that is to be released, use GitHub's release functionality to
+create the tag and the release. And, don't forget to add some details about the
+latest and greatest changes.
 
 ## Post Process
 

@@ -1,7 +1,7 @@
 ![CoreMedia Labs Logo](https://documentation.coremedia.com/badges/banner_coremedia_labs_wide.png "CoreMedia Labs Logo")
 
-![CoreMedia Content Cloud Version](https://img.shields.io/static/v1?message=2007&label=CoreMedia%20Content%20Cloud&style=for-the-badge&labelColor=666666&color=672779 
-"This badge shows the CoreMedia version this project is compatible with. 
+![CoreMedia Content Cloud Version](https://img.shields.io/static/v1?message=2101&label=CoreMedia%20Content%20Cloud&style=for-the-badge&labelColor=666666&color=672779 
+"This badge shows the CoreMedia version(s) this project is compatible with. 
 Please read the versioning section of the project to see what other CoreMedia versions are supported and how to find them."
 )
 ![Status](https://img.shields.io/static/v1?message=active&label=Status&style=for-the-badge&labelColor=666666&color=2FAC66 
@@ -11,12 +11,18 @@ If a project is inactive it means that the development has been discontinued and
 
 # Content Hub Adapter for a CoreMedia Repository
 
-The **content-hub-adapter-coremedia** extension is providing access to a "to be configurable" CoreMedia repository. 
-The repository data is, after successfully configuration the content-hub-adapter, available as an additional tree inside the studio instance.
+The **content-hub-adapter-coremedia** plugin provides access to an other CoreMedia repository. 
+The repository data is available as an additional tree in the Studio library.
 
 ## Versioning
 
-To find out which CoreMedia versions are supported by this project, please take look at the releases section or on the existing branches. To find the matching version of your CoreMedia system, please checkout the branch with the corresponding name. For example, if your CoreMedia version is 2007.2, checkout the branch cmcc-10-2007.
+The master branch of this project is suitable for CoreMedia versions since 2101.
+It is based on the plugin architecture.
+
+For older CoreMedia versions there are branches with corresponding names.
+For example, if your CoreMedia version is 2007.2, checkout the branch cmcc-10-2007.
+These older versions are based on the extensions architecture, because plugins
+are available only since 2101.
 
 ## Documentation & Tutorial
 
@@ -42,7 +48,7 @@ CoreMedia. Whatever your experience level with CoreMedia is, we've got something
 for you.
 
 Each project in our Labs platform is an extra feature to be used with CoreMedia,
-including extensions, tools and 3rd party integrations. We provide some test
+including plugins, extensions, tools and 3rd party integrations. We provide some test
 data and explanatory videos for non-customers and for insiders there is
 open-source code and instructions on integrating the feature into your
 CoreMedia workspace. 

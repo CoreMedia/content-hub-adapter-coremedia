@@ -28,12 +28,12 @@ for preliminary steps.
 ### Global adapter configuration
 To enable the content-hub-adapter-coremedia for all sites, it is necessary to create a CMSettings document inside the location:
 * contenthub.studio.global-configuration-path
-For convenience reasons, naming proposal of this document is "coremedia" (postfix of the extension name)
+For convenience reasons, naming proposal of this document is "coremedia" (postfix of the plugin name)
 
 ### Site specific adapter configuration
 To enable the content-hub-adapter-coremedia for a single site, it is necessary to create a CMSettings document inside the location:
 * contenthub.studio.site-configuration-path
-For convenience reasons, naming proposal of this document is "coremedia" (postfix of the extension name)
+For convenience reasons, naming proposal of this document is "coremedia" (postfix of the plugin name)
 
 
 ## Detailed adapter configuration
