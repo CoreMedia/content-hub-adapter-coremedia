@@ -45,7 +45,7 @@ In short, for a quick development roundtrip:
 2. Build the `content-hub-adapter-coremedia` plugin with `mvn clean install`.
    Checkpoint: There should be zip files in the target directories of the `studio-client` and `studio-server` modules now.
 3. Create a directory for studio-server plugins, e.g. `/tmp/studio-server-plugins`, 
-and copy `content-hub-adapter-coremedia/studio-server/target/studio-server.content-hub-adapter-filesystem-<version>.zip`
+and copy `content-hub-adapter-coremedia/studio-server/target/studio-server.content-hub-adapter-coremedia-<version>.zip`
 into that directory.
 4. Start the studio server as usual, e.g. `mvn spring-boot:run`, with an additional property `-Dplugins.directory=/tmp/studio-server-plugins`
 5. Start the studio client with an additional property `-DadditionalPackagesDirs=/.../content-hub-adapter-coremedia/studio-client/target/app`
