@@ -1,4 +1,4 @@
-package com.coremedia.blueprint.contenthub.adapters.coremedia;
+package com.coremedia.labs.plugins.adapters.coremedia.server;
 
 interface CoreMediaContentHubConfiguration {
   String getUsername();

@@ -26,7 +26,6 @@ are available only since 2101.
 
 ## Documentation & Tutorial
 
-
 * **[Documentation](docs/README.md)**
 
     for guides for editors, administrators and developers    

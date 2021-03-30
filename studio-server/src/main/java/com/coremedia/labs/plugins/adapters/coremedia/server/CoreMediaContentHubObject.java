@@ -1,4 +1,4 @@
-package com.coremedia.blueprint.contenthub.adapters.coremedia;
+package com.coremedia.labs.plugins.adapters.coremedia.server;
 
 
 import com.coremedia.cap.content.Content;
@@ -9,10 +9,9 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 
 abstract class CoreMediaContentHubObject implements ContentHubObject {
 
-  private ContentHubObjectId hubId;
-  private String name;
-
-  private Content content;
+  private final ContentHubObjectId hubId;
+  private final String name;
+  private final Content content;
 
   CoreMediaContentHubObject(Content content, ContentHubObjectId hubId) {
     this.hubId = hubId;

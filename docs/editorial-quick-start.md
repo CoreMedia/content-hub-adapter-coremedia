@@ -51,6 +51,16 @@ in Studio with the struct editor by pressing "add Item to ListProperty". The tab
 | Key           | Type       | Value                 | Required   |
 |---------------|------------|------------           |------------|
 | connectionId  | String      | <YOUR_CHOOSEN_ID>    | Yes        |
-| factoryId     | String      | coremedia-navigation | Yes        |
+| factoryId     | String      | coremedia | Yes        |
 | enabled       | Boolean     | true or false        | Yes        |
 | settings       | Struct     |                      | Yes        |
+
+Finally you need to configure the connector.
+
+| Key           | Type       | Value                 | Required   |
+|---------------|------------|------------           |------------|
+| path          | String     | Restrict access to specific paths within the remote repository    | No        |
+| username      | String     | Username for the connection (e.g. admin)        | Yes |
+| password      | String     | Password for the connection (e.g. admin)        | Yes        |
+| ior           | String     | IOR for the connection                     | Yes        |
+| ignoredTypes  | String     | Comma separated list of doctypes to exclude                     | No        |

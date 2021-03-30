@@ -1,4 +1,4 @@
-package com.coremedia.blueprint.contenthub.adapters.coremedia;
+package com.coremedia.labs.plugins.adapters.coremedia.server;
 
 import com.coremedia.contenthub.api.ContentHubAdapterFactory;
 import com.coremedia.contenthub.api.column.ColumnProvider;
@@ -7,13 +7,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CoreMediaConfiguration {
+
   @Bean
   public ColumnProvider coreMediaContentHubColumnModelProvider() {
     return new CoreMediaColumnProvider();
   }
 
   @Bean
-  public ContentHubAdapterFactory coreMediaContentHubAdapterFactory() {
+  public ContentHubAdapterFactory<?> coreMediaContentHubAdapterFactory() {
     return new CoreMediaContentHubAdapterFactory();
   }
 }
