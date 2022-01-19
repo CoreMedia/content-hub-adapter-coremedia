@@ -1,4 +1,4 @@
-package com.coremedia.blueprint.contenthub.adapters.coremedia;
+package com.coremedia.labs.plugins.adapters.coremedia.model;
 
 
 import com.coremedia.cap.content.Content;
@@ -6,18 +6,23 @@ import com.coremedia.contenthub.api.ContentHubObject;
 import com.coremedia.contenthub.api.ContentHubObjectId;
 import com.coremedia.contenthub.api.ContentHubType;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import org.apache.commons.lang3.StringUtils;
 
-abstract class CoreMediaContentHubObject implements ContentHubObject {
+public abstract class CoreMediaContentHubObject implements ContentHubObject {
 
   private ContentHubObjectId hubId;
   private String name;
 
   private Content content;
 
-  CoreMediaContentHubObject(Content content, ContentHubObjectId hubId) {
+  public CoreMediaContentHubObject(Content content, ContentHubObjectId hubId) {
+    this(content, hubId, null);
+  }
+
+  public CoreMediaContentHubObject(Content content, ContentHubObjectId hubId, String name) {
     this.hubId = hubId;
     this.content = content;
-    this.name = content.getName();
+    this.name = StringUtils.isNotBlank(name) ? name : content.getName();
   }
 
   @NonNull
@@ -26,7 +31,7 @@ abstract class CoreMediaContentHubObject implements ContentHubObject {
     return new ContentHubType(getContent().getType().getName());
   }
 
-  Content getContent() {
+  public Content getContent() {
     return content;
   }
 

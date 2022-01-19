@@ -1,4 +1,4 @@
-package com.coremedia.blueprint.contenthub.adapters.coremedia;
+package com.coremedia.labs.plugins.adapters.coremedia.model;
 
 import com.coremedia.cap.common.UrlBlob;
 import com.coremedia.cap.content.Content;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-class CoreMediaItem extends CoreMediaContentHubObject implements Item {
+public class CoreMediaItem extends CoreMediaContentHubObject implements Item {
 
   private static final String MAIN = "main";
   private static final String DATA_PROPERTY = "data";
@@ -27,7 +27,7 @@ class CoreMediaItem extends CoreMediaContentHubObject implements Item {
   private static final String PREVIEW = "preview";
   private static final String CM_PICTURE = "CMPicture";
 
-  CoreMediaItem(Content content, ContentHubObjectId id) {
+  public CoreMediaItem(Content content, ContentHubObjectId id) {
     super(content, id);
   }
 

@@ -1,4 +1,4 @@
-package com.coremedia.blueprint.contenthub.adapters.coremedia;
+package com.coremedia.labs.plugins.adapters.coremedia;
 
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentRepository;
@@ -8,6 +8,7 @@ import com.coremedia.contenthub.api.Folder;
 import com.coremedia.contenthub.api.column.Column;
 import com.coremedia.contenthub.api.column.ColumnValue;
 import com.coremedia.contenthub.api.column.DefaultColumnProvider;
+import com.coremedia.labs.plugins.adapters.coremedia.model.CoreMediaContentHubObject;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Adds a custom column for the lifecycle status of a content.
  */
-class CoreMediaColumnProvider extends DefaultColumnProvider {
+public class CoreMediaColumnProvider extends DefaultColumnProvider {
 
   public static final String CREATED = "created";
   public static final String STATUS = "status";

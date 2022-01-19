@@ -1,4 +1,4 @@
-package com.coremedia.blueprint.contenthub.adapters.coremedia;
+package com.coremedia.labs.plugins.adapters.coremedia;
 
 import com.coremedia.cap.Cap;
 import com.coremedia.cap.common.CapConnection;
@@ -22,6 +22,9 @@ import com.coremedia.contenthub.api.search.ContentHubSearchResult;
 import com.coremedia.contenthub.api.search.ContentHubSearchService;
 import com.coremedia.contenthub.api.search.Sort;
 import com.coremedia.contenthub.api.search.SortDirection;
+import com.coremedia.labs.plugins.adapters.coremedia.model.CoreMediaContentHubObject;
+import com.coremedia.labs.plugins.adapters.coremedia.model.CoreMediaFolder;
+import com.coremedia.labs.plugins.adapters.coremedia.model.CoreMediaItem;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import org.apache.commons.lang3.StringUtils;
@@ -39,7 +42,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchService {
+public class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchService {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   private final ContentHubObjectId rootId;
@@ -50,7 +53,7 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
   private final String connectionId;
   private final CoreMediaColumnProvider coreMediaColumnProvider;
 
-  CoreMediaContentHubAdapter(@NonNull CoreMediaContentHubConfiguration settings, String connectionId, ContentRepository contentRepository) {
+  CoreMediaContentHubAdapter(@NonNull CoreMediaContentHubSettings settings, String connectionId, ContentRepository contentRepository) {
     this.connectionId = connectionId;
     this.coreMediaColumnProvider = new CoreMediaColumnProvider();
     try {
@@ -58,6 +61,7 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
       String pwd = settings.getPassword();
       String ior = settings.getIor();
       String path = settings.getPath();
+      String displayName = settings.getDisplayName();
 
       if (StringUtils.isEmpty(ior)) {
         LOG.warn("No 'ior' configuration found for connection '{}', using system repository as fallback.", connectionId);
@@ -69,7 +73,7 @@ class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchS
 
       rootContent = StringUtils.isEmpty(path) ? repository.getRoot() : repository.getChild(path);
       rootId = new ContentHubObjectId(connectionId, rootContent.getId());
-      rootFolder = new CoreMediaFolder(rootContent, rootId);
+      rootFolder = new CoreMediaFolder(rootContent, rootId, displayName);
 
       String ignoredTypesString = settings.getIgnoredTypes();
       if (!StringUtils.isEmpty(ignoredTypesString)) {
