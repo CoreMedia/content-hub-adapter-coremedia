@@ -12,7 +12,7 @@ Changelog
 
   Adapter has been migrated to work with CoreMedia Content Cloud 11.
 
-## 2010.1-1
+## 1.0.0 (2010.1-1)
 - **Initial Release 🥳**
      
   Basic implementation of the Content Hub API.
