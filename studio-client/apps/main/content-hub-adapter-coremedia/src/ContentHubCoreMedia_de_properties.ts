@@ -10,6 +10,8 @@ ResourceBundleUtil.override(ContentHubCoreMedia_properties, {
   lastModified_sectionItemKey: "Zuletzt bearbeitet",
   metadata_sectionName: "Metadaten",
   name_sectionItemKey: "Name",
-  type_sectionItemKey: "Typ"
+  type_sectionItemKey: "Typ",
+  status_header: "Status",
+  created_header: "Erstellt"
 });
 

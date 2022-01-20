@@ -25,6 +25,12 @@ interface ContentHubCoreMedia_properties {
   metadata_sectionName: string;
   name_sectionItemKey: string;
   type_sectionItemKey: string;
+
+  /**
+   * Column headers
+   */
+  status_header: string;
+  created_header: string;
 }
 
 /**
@@ -40,8 +46,9 @@ const ContentHubCoreMedia_properties:ContentHubCoreMedia_properties = {
   lastModified_sectionItemKey: "Last modified",
   metadata_sectionName: "Metadata",
   name_sectionItemKey: "Name",
-  type_sectionItemKey: "Type"
-
+  type_sectionItemKey: "Type",
+  status_header: "Status",
+  created_header: "Created"
 }
 
 export default ContentHubCoreMedia_properties;

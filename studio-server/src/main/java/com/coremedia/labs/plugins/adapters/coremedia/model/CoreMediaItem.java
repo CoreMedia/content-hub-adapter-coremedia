@@ -1,11 +1,9 @@
 package com.coremedia.labs.plugins.adapters.coremedia.model;
 
+import com.coremedia.cap.common.Blob;
 import com.coremedia.cap.common.UrlBlob;
 import com.coremedia.cap.content.Content;
-import com.coremedia.contenthub.api.ContentHubBlob;
-import com.coremedia.contenthub.api.ContentHubObjectId;
-import com.coremedia.contenthub.api.Item;
-import com.coremedia.contenthub.api.UrlBlobBuilder;
+import com.coremedia.contenthub.api.*;
 import com.coremedia.contenthub.api.preview.DetailsElement;
 import com.coremedia.contenthub.api.preview.DetailsSection;
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -14,6 +12,8 @@ import edu.umd.cs.findbugs.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static com.coremedia.contenthub.api.ContentHubBlob.THUMBNAIL_BLOB_CLASSIFIER;
 
 public class CoreMediaItem extends CoreMediaContentHubObject implements Item {
 
@@ -53,30 +53,75 @@ public class CoreMediaItem extends CoreMediaContentHubObject implements Item {
   }
 
   private List<DetailsSection> contentDetails() {
-    List<DetailsElement<?>> elements = List.of(new DetailsElement<>(getContent().getName(), SHOW_TYPE_ICON));
-    return List.of(new DetailsSection(MAIN, elements, false, false, false), getMetaDataSection());
+    return List.of(
+            // Name & icon
+            new DetailsSection(MAIN, List.of(
+                    new DetailsElement<>(getName(), SHOW_TYPE_ICON)),
+                    false, false, false),
+            // Metadata
+            getMetaDataSection());
   }
 
   private List<DetailsSection> pictureDetails() {
-    ContentHubBlob picture = new UrlBlobBuilder(this, PREVIEW).withUrl(getUrlBlob().getUrl()).withEtag().build();
-    List<DetailsElement<?>> elements = List.of(new DetailsElement<>(getContent().getName(), false, picture));
-    return List.of(new DetailsSection(MAIN, elements, false, false, false), getMetaDataSection());
+    ContentHubBlob thumbnail = getBlob(PREVIEW);
+    return List.of(
+            // Name & thumbnail
+            new DetailsSection(MAIN, List.of(
+                    new DetailsElement<>(getName(), false, Objects.requireNonNullElse(thumbnail, SHOW_TYPE_ICON))
+            ), false, false, false),
+            // Metadata
+            getMetaDataSection());
   }
 
   private UrlBlob getUrlBlob() {
-    return (UrlBlob) getContent().get(DATA_PROPERTY);
+    if (getContent().getProperties().containsKey(DATA_PROPERTY)) {
+      return (UrlBlob) getContent().get(DATA_PROPERTY);
+    }
+    return null;
+  }
+
+  private Blob getDataBlob() {
+    if (getContent().getProperties().containsKey(DATA_PROPERTY)) {
+      return getContent().getBlob(DATA_PROPERTY);
+    }
+    return null;
   }
 
   @Nullable
   @Override
   public ContentHubBlob getBlob(String classifier) {
-    return new UrlBlobBuilder(this, classifier).withUrl(getUrlBlob().getUrl()).withEtag().build();
+    ContentHubBlob blob = null;
+    try {
+      Blob dataBlob = getDataBlob();
+      if (dataBlob != null) {
+        blob = new ContentHubDefaultBlob(
+                this,
+                classifier,
+                dataBlob.getContentType(),
+                dataBlob.getSize(),
+                dataBlob::getInputStream,
+                dataBlob.getETag());
+      }
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Cannot create blob for " + this, e);
+    }
+    return blob;
+  }
+
+  @Nullable
+  @Override
+  public ContentHubBlob getThumbnailBlob() {
+    ContentHubBlob thumbnailBlob = null;
+    if (getContent().getType().getName().equals(CM_PICTURE)) {
+      thumbnailBlob = getBlob(THUMBNAIL_BLOB_CLASSIFIER);
+    }
+    return thumbnailBlob;
   }
 
   @NonNull
   private DetailsSection getMetaDataSection() {
     return new DetailsSection(METADATA, List.of(
-            new DetailsElement<>(NAME, getContent().getName()),
+            new DetailsElement<>(NAME, getName()),
             new DetailsElement<>(ID, getContent().getId()),
             new DetailsElement<>(TYPE, getContent().getType().getName()),
             new DetailsElement<>(LAST_MODIFIED, getContent().getModificationDate())

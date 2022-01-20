@@ -116,12 +116,12 @@
       <scope>provided</scope>
     </dependency>
 
-    <!--<dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>${jakarta.servlet.api.version}</version>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>4.4</version>
       <scope>provided</scope>
-    </dependency>-->
+    </dependency>
 
     <dependency>
       <groupId>com.github.spotbugs</groupId>
