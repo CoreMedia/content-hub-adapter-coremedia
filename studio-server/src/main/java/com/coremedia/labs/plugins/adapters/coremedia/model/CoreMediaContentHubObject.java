@@ -10,10 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 
 public abstract class CoreMediaContentHubObject implements ContentHubObject {
 
-  private ContentHubObjectId hubId;
-  private String name;
+  private final ContentHubObjectId hubId;
+  private final String name;
 
-  private Content content;
+  private final Content content;
 
   public CoreMediaContentHubObject(Content content, ContentHubObjectId hubId) {
     this(content, hubId, null);
