@@ -3,10 +3,15 @@ package com.coremedia.labs.plugins.adapters.coremedia;
 import com.coremedia.cap.common.CapPropertyDescriptor;
 import com.coremedia.cap.common.CapPropertyDescriptorType;
 import com.coremedia.cap.content.Content;
-import com.coremedia.contenthub.api.*;
+import com.coremedia.contenthub.api.ContentHubAdapter;
+import com.coremedia.contenthub.api.ContentHubContext;
+import com.coremedia.contenthub.api.ContentHubObject;
+import com.coremedia.contenthub.api.ContentHubTransformer;
+import com.coremedia.contenthub.api.ContentModel;
+import com.coremedia.contenthub.api.ContentModelReference;
+import com.coremedia.contenthub.api.Item;
 import com.coremedia.labs.plugins.adapters.coremedia.model.CoreMediaItem;
 import edu.umd.cs.findbugs.annotations.Nullable;
-import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +37,7 @@ public class CoreMediaContentHubTransformer implements ContentHubTransformer {
           "viewtype"
   );
 
-  private CoreMediaContentHubSettings settings;
+  private final CoreMediaContentHubSettings settings;
 
   public CoreMediaContentHubTransformer(CoreMediaContentHubSettings settings) {
     this.settings = settings;
@@ -40,7 +45,7 @@ public class CoreMediaContentHubTransformer implements ContentHubTransformer {
 
   @Nullable
   @Override
-  public ContentModel transform(Item source, ContentHubAdapter contentHubAdapter, ContentHubContext contentHubContext) throws ContentHubContentCreationException {
+  public ContentModel transform(Item source, ContentHubAdapter contentHubAdapter, ContentHubContext contentHubContext) {
     if (!(source instanceof CoreMediaItem)) {
       throw new IllegalArgumentException("Cannot transform source " + source);
     }
@@ -83,9 +88,7 @@ public class CoreMediaContentHubTransformer implements ContentHubTransformer {
             // Create references for links
             List<Content> linkedContents = externalContent.getLinks(prop);
             List<ContentModelReference> refs = new ArrayList<>();
-            linkedContents.forEach(c -> {
-              refs.add(ContentModelReference.create(contentModel, c.getType().getName(), c));
-            });
+            linkedContents.forEach(c -> refs.add(ContentModelReference.create(contentModel, c.getType().getName(), c)));
             contentModel.put(prop, refs);
 
           } else {
@@ -96,13 +99,4 @@ public class CoreMediaContentHubTransformer implements ContentHubTransformer {
       }
     });
   }
-
-  private List<String> getIgnoredProperties() {
-    try {
-      return CollectionUtils.isNotEmpty(settings.getIgnoredProperties()) ? settings.getIgnoredProperties() : DEFAULT_IGNORED_PROPERTIES;
-    } catch (Exception e) {
-      return DEFAULT_IGNORED_PROPERTIES;
-    }
-  }
-
 }

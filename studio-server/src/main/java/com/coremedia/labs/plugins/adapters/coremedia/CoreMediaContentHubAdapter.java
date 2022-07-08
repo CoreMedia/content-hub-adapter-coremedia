@@ -6,7 +6,15 @@ import com.coremedia.cap.content.Content;
 import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.content.ContentType;
 import com.coremedia.cap.content.search.SearchResult;
-import com.coremedia.contenthub.api.*;
+import com.coremedia.contenthub.api.ContentHubAdapter;
+import com.coremedia.contenthub.api.ContentHubContext;
+import com.coremedia.contenthub.api.ContentHubObject;
+import com.coremedia.contenthub.api.ContentHubObjectId;
+import com.coremedia.contenthub.api.ContentHubTransformer;
+import com.coremedia.contenthub.api.ContentHubType;
+import com.coremedia.contenthub.api.Folder;
+import com.coremedia.contenthub.api.GetChildrenResult;
+import com.coremedia.contenthub.api.Item;
 import com.coremedia.contenthub.api.column.ColumnProvider;
 import com.coremedia.contenthub.api.exception.ContentHubException;
 import com.coremedia.contenthub.api.pagination.PaginationRequest;
@@ -19,27 +27,21 @@ import com.coremedia.labs.plugins.adapters.coremedia.model.CoreMediaFolder;
 import com.coremedia.labs.plugins.adapters.coremedia.model.CoreMediaItem;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHubSearchService {
   private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-
-  private final ContentHubObjectId rootId;
-  private final CoreMediaFolder rootFolder;
-  private final ContentRepository repository;
-  private final Content rootContent;
-  private final String connectionId;
-  private final CoreMediaColumnProvider coreMediaColumnProvider;
-  private final CoreMediaContentHubSettings settings;
-
   private static final List<String> DEFAULT_IGNORED_TYPES = List.of(
           "CMAction",
           "CMFolderProperties",
@@ -66,6 +68,13 @@ public class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHub
           "CMUserProfile",
           "CMP13NSearch"
   );
+  private final ContentHubObjectId rootId;
+  private final CoreMediaFolder rootFolder;
+  private final ContentRepository repository;
+  private final Content rootContent;
+  private final String connectionId;
+  private final CoreMediaColumnProvider coreMediaColumnProvider;
+  private final CoreMediaContentHubSettings settings;
 
   CoreMediaContentHubAdapter(@NonNull CoreMediaContentHubSettings settings, String connectionId, ContentRepository contentRepository) {
     this.settings = settings;
@@ -94,6 +103,11 @@ public class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHub
       LOG.error("Failed to initialized adapter for CoreMedia repository: {}", e.getMessage());
       throw new ContentHubException("Failed to initialized content hub adapter for CoreMedia", e);
     }
+  }
+
+  private static ContentHubType contentTypeAsContentHubType(ContentType contentType) {
+    ContentType parent = contentType.getParent();
+    return new ContentHubType(contentType.getName(), parent == null ? null : contentTypeAsContentHubType(parent));
   }
 
   @NonNull
@@ -162,11 +176,6 @@ public class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHub
             .collect(Collectors.toUnmodifiableList());
   }
 
-  private static ContentHubType contentTypeAsContentHubType(ContentType contentType) {
-    ContentType parent = contentType.getParent();
-    return new ContentHubType(contentType.getName(), parent == null ? null : contentTypeAsContentHubType(parent));
-  }
-
   @Nullable
   private ContentType contentHubTypeAsContentType(@Nullable ContentHubType type) {
     return type == null ? null : repository.getContentType(type.getName());
@@ -181,7 +190,7 @@ public class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHub
             .stream()
             .filter(Objects::nonNull)
             .filter(Content::isReadable)
-            .filter(c -> !getIgnoredTypes().contains(c.getType().getName()))
+            .filter(c -> !isIgnored(c.getType()))
             .map(c -> (c.isDocument()) ?
                     new CoreMediaItem(c, new ContentHubObjectId(connectionId, c.getId())) :
                     new CoreMediaFolder(c, new ContentHubObjectId(connectionId, c.getId())))
@@ -232,7 +241,7 @@ public class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHub
     if (content.equals(rootContent)) {
       return Optional.of(rootFolder);
     }
-    if (!content.isReadable() || !content.isChildOf(rootContent) || isIgnored(content)) {
+    if (!content.isReadable() || !content.isChildOf(rootContent) || isIgnored(content.getType())) {
       return Optional.empty();
     }
     if (content.isFolder()) {
@@ -246,25 +255,17 @@ public class CoreMediaContentHubAdapter implements ContentHubAdapter, ContentHub
     return Optional.of(new CoreMediaItem(content, itemId));
   }
 
-  private boolean isIgnored(Content childDocument) {
-    return isIgnored(childDocument.getType());
-  }
-
   private boolean isIgnored(ContentType contentType) {
-    for (String ignoredType : getIgnoredTypes()) {
-      if (contentType.isSubtypeOf(ignoredType)) {
-        return true;
-      }
-    }
-    return false;
+    return getIgnoredTypes().stream().anyMatch(contentType::isSubtypeOf);
   }
 
-  private List<String> getIgnoredTypes() {
+  private List<ContentType> getIgnoredTypes() {
+    List<String> ignoredTypesAsString = DEFAULT_IGNORED_TYPES;
     try {
-      return CollectionUtils.isNotEmpty(settings.getIgnoredTypes()) ? settings.getIgnoredTypes() : DEFAULT_IGNORED_TYPES;
-    } catch (Exception e) {
-      return DEFAULT_IGNORED_TYPES;
+      ignoredTypesAsString = (settings.getIgnoredTypes() != null && !settings.getIgnoredTypes().isEmpty()) ? settings.getIgnoredTypes() : DEFAULT_IGNORED_TYPES;
+    } catch (Exception ignored) {
     }
+    return ignoredTypesAsString.stream().filter(item -> repository.getContentType(item) != null).map(repository::getContentType).collect(Collectors.toList());
   }
 
   @NonNull

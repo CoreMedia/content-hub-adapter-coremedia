@@ -11,7 +11,7 @@ public class CoreMediaContentHubAdapterFactory implements ContentHubAdapterFacto
 
   private static final String ADAPTER_ID = "coremedia";
 
-  private ContentRepository contentRepository;
+  private final ContentRepository contentRepository;
 
   public CoreMediaContentHubAdapterFactory(ContentRepository contentRepository) {
     this.contentRepository = contentRepository;
