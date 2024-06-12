@@ -5,20 +5,21 @@
   "license": "CoreMedia Open Source License",
   "private": true,
   "dependencies": {
-    "@coremedia/studio-client.core-icons": "2110.2.0",
-    "@coremedia/studio-client.main.content-hub-editor-components": "2110.2.0",
-    "@coremedia/studio-client.main.editor-components": "2110.2.0",
-    "@coremedia/studio-client.cap-base-models": "2110.2.0",
+    "@coremedia/studio-client.core-icons": "2404.2.0",
+    "@coremedia/studio-client.main.content-hub-editor-components": "2404.2.0",
+    "@coremedia/studio-client.main.editor-components": "2404.2.0",
+    "@coremedia/studio-client.cap-base-models": "2404.2.0",
     "@jangaroo/runtime": "^1.0.0"
   },
   "devDependencies": {
-    "@jangaroo/build": "^1.0.0",
-    "@jangaroo/core": "^1.0.0",
-    "@jangaroo/eslint-config": "^1.0.0",
-    "@jangaroo/publish": "^1.0.0",
-    "@jangaroo/run": "^1.0.0",
-    "eslint": "7.27.0",
-    "rimraf": "^3.0.2"
+    "@jangaroo/build": "^3.0.0",
+    "@jangaroo/core": "^3.0.0",
+    "@jangaroo/publish": "^3.0.0",
+    "@jangaroo/run": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "rimraf": "^5.0.5",
+    "@jangaroo/eslint-config": "^1.5.0",
+    "eslint": "7.27.0"
   },
   "scripts": {
     "clean": "rimraf ./dist && rimraf ./build",
