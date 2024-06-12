@@ -720,7 +720,7 @@ packages:
     resolution: {integrity: sha512-WTPxgeQNzhAeVZXeX37jL8WjJSvt4J5iiEwdlxQNYpKCo12yRb4k4a9RPzWxjwnTTZy5vkJ8agElgvkRnA4HdQ==}
 
   '@coremedia/studio-client.cap-base-models@2404.2.0':
-    resolution: {integrity: sha512-WTPxgeQNzhAeVZXeX37jL8WjJSvt4J5iiEwdlxQNYpKCo12yRb4k4a9RPzWxjwnTTZy5vkJ8agElgvkRnA4HdQ==, tarball: https://nexus.presales-ci-01.coremedia.vm/repository/coremedia-npm/@coremedia/studio-client.cap-base-models/-/studio-client.cap-base-models-2404.2.0.tgz}
+    resolution: {integrity: sha512-WTPxgeQNzhAeVZXeX37jL8WjJSvt4J5iiEwdlxQNYpKCo12yRb4k4a9RPzWxjwnTTZy5vkJ8agElgvkRnA4HdQ==}
 
   '@coremedia/studio-client.cap-base-services-api@2110.2.0':
     resolution: {integrity: sha512-5K59Dma53AjNuwpRtKpa41AsCwzVYWt4WtB/bxO0h3MEaxUb+ooi/m6mvyU0HmXDr9gtECloqzyDdcxrJcCmjg==}
@@ -759,7 +759,7 @@ packages:
     resolution: {integrity: sha512-xLMNUV8a+AL7UgRhYvRvv2g8d556F+Md6a8gs+YDt5v7vPVgd90dcEif5/RKPS9lQCuhb4i1dCgXYFEGfNiw7g==}
 
   '@coremedia/studio-client.core-icons@2404.2.0':
-    resolution: {integrity: sha512-xLMNUV8a+AL7UgRhYvRvv2g8d556F+Md6a8gs+YDt5v7vPVgd90dcEif5/RKPS9lQCuhb4i1dCgXYFEGfNiw7g==, tarball: https://nexus.presales-ci-01.coremedia.vm/repository/coremedia-npm/@coremedia/studio-client.core-icons/-/studio-client.core-icons-2404.2.0.tgz}
+    resolution: {integrity: sha512-xLMNUV8a+AL7UgRhYvRvv2g8d556F+Md6a8gs+YDt5v7vPVgd90dcEif5/RKPS9lQCuhb4i1dCgXYFEGfNiw7g==}
 
   '@coremedia/studio-client.embed-app-services-api@2110.2.0':
     resolution: {integrity: sha512-VZ4Eh1njRZc0nErRm3zC3elL6VyUCKYUIg0JZhjb4Ylv9Ko+DOCa+FEhzlHdgMFDkNoNsXh+HQ3VYjmjOT3uAw==}
@@ -840,13 +840,13 @@ packages:
     resolution: {integrity: sha512-NTRmwLQ6wqZeTwr3nXTwa5it8apIk5x1D8cyK8mFL+kL4ITRbDyxWm4Bo+dHFRFf3flBqFEiuJJfbJv+aWS84w==}
 
   '@coremedia/studio-client.main.content-hub-editor-components@2404.2.0':
-    resolution: {integrity: sha512-1ngObNfI0aUEiDI/TGiSh+9Ty7u6DwSITcHaaorVpsKb6hXOfJcBB0wYw4I1gYVMTnC46DNXsWKpcGrFqqHKlw==, tarball: https://nexus.presales-ci-01.coremedia.vm/repository/coremedia-npm/@coremedia/studio-client.main.content-hub-editor-components/-/studio-client.main.content-hub-editor-components-2404.2.0.tgz}
+    resolution: {integrity: sha512-1ngObNfI0aUEiDI/TGiSh+9Ty7u6DwSITcHaaorVpsKb6hXOfJcBB0wYw4I1gYVMTnC46DNXsWKpcGrFqqHKlw==}
 
   '@coremedia/studio-client.main.editor-components@2110.2.0':
     resolution: {integrity: sha512-rwcOuZAtAK5k4TorSXuu8AuIlj41zrRCkVFXCFBSv47yyZGPRjibbhLEN33/YXSB371T7KlV4g5Seel52uzssg==}
 
   '@coremedia/studio-client.main.editor-components@2404.2.0':
-    resolution: {integrity: sha512-rwcOuZAtAK5k4TorSXuu8AuIlj41zrRCkVFXCFBSv47yyZGPRjibbhLEN33/YXSB371T7KlV4g5Seel52uzssg==, tarball: https://nexus.presales-ci-01.coremedia.vm/repository/coremedia-npm/@coremedia/studio-client.main.editor-components/-/studio-client.main.editor-components-2404.2.0.tgz}
+    resolution: {integrity: sha512-rwcOuZAtAK5k4TorSXuu8AuIlj41zrRCkVFXCFBSv47yyZGPRjibbhLEN33/YXSB371T7KlV4g5Seel52uzssg==}
 
   '@coremedia/studio-client.multi-site-models@2110.2.0':
     resolution: {integrity: sha512-M/vfdH+i7V0rNSXfV/fM3DQrVo96YgXBdlHbmyAWDq8/PMn4fmwAOjHuCIfbgSH8WcM47kKPeqtixKpYHMc0pA==}
