@@ -33,17 +33,17 @@ importers:
   apps/main/content-hub-adapter-coremedia:
     dependencies:
       '@coremedia/studio-client.cap-base-models':
-        specifier: 2404.2.0
-        version: 2404.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.core-icons':
-        specifier: 2404.2.0
-        version: 2404.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.main.content-hub-editor-components':
-        specifier: 2404.2.0
-        version: 2404.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.main.editor-components':
-        specifier: 2404.2.0
-        version: 2404.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@jangaroo/runtime':
         specifier: ^1.0.0
         version: 1.0.2
@@ -719,7 +719,7 @@ packages:
   '@coremedia/studio-client.cap-base-models@2110.2.0':
     resolution: {integrity: sha512-WTPxgeQNzhAeVZXeX37jL8WjJSvt4J5iiEwdlxQNYpKCo12yRb4k4a9RPzWxjwnTTZy5vkJ8agElgvkRnA4HdQ==}
 
-  '@coremedia/studio-client.cap-base-models@2404.2.0':
+  '@coremedia/studio-client.cap-base-models@2404.1.0':
     resolution: {integrity: sha512-WTPxgeQNzhAeVZXeX37jL8WjJSvt4J5iiEwdlxQNYpKCo12yRb4k4a9RPzWxjwnTTZy5vkJ8agElgvkRnA4HdQ==}
 
   '@coremedia/studio-client.cap-base-services-api@2110.2.0':
@@ -758,7 +758,7 @@ packages:
   '@coremedia/studio-client.core-icons@2110.2.0':
     resolution: {integrity: sha512-xLMNUV8a+AL7UgRhYvRvv2g8d556F+Md6a8gs+YDt5v7vPVgd90dcEif5/RKPS9lQCuhb4i1dCgXYFEGfNiw7g==}
 
-  '@coremedia/studio-client.core-icons@2404.2.0':
+  '@coremedia/studio-client.core-icons@2404.1.0':
     resolution: {integrity: sha512-xLMNUV8a+AL7UgRhYvRvv2g8d556F+Md6a8gs+YDt5v7vPVgd90dcEif5/RKPS9lQCuhb4i1dCgXYFEGfNiw7g==}
 
   '@coremedia/studio-client.embed-app-services-api@2110.2.0':
@@ -839,13 +839,13 @@ packages:
   '@coremedia/studio-client.link-list-models@2110.2.0':
     resolution: {integrity: sha512-NTRmwLQ6wqZeTwr3nXTwa5it8apIk5x1D8cyK8mFL+kL4ITRbDyxWm4Bo+dHFRFf3flBqFEiuJJfbJv+aWS84w==}
 
-  '@coremedia/studio-client.main.content-hub-editor-components@2404.2.0':
+  '@coremedia/studio-client.main.content-hub-editor-components@2404.1.0':
     resolution: {integrity: sha512-1ngObNfI0aUEiDI/TGiSh+9Ty7u6DwSITcHaaorVpsKb6hXOfJcBB0wYw4I1gYVMTnC46DNXsWKpcGrFqqHKlw==}
 
   '@coremedia/studio-client.main.editor-components@2110.2.0':
     resolution: {integrity: sha512-rwcOuZAtAK5k4TorSXuu8AuIlj41zrRCkVFXCFBSv47yyZGPRjibbhLEN33/YXSB371T7KlV4g5Seel52uzssg==}
 
-  '@coremedia/studio-client.main.editor-components@2404.2.0':
+  '@coremedia/studio-client.main.editor-components@2404.1.0':
     resolution: {integrity: sha512-rwcOuZAtAK5k4TorSXuu8AuIlj41zrRCkVFXCFBSv47yyZGPRjibbhLEN33/YXSB371T7KlV4g5Seel52uzssg==}
 
   '@coremedia/studio-client.multi-site-models@2110.2.0':
@@ -4451,7 +4451,7 @@ snapshots:
       '@jangaroo/runtime': 1.0.2
       lodash: 4.17.21
 
-  '@coremedia/studio-client.cap-base-models@2404.2.0':
+  '@coremedia/studio-client.cap-base-models@2404.1.0':
     dependencies:
       '@coremedia/service-agent': 1.0.0
       '@coremedia/studio-client.base-models': 2110.2.0
@@ -4540,7 +4540,7 @@ snapshots:
     dependencies:
       '@jangaroo/runtime': 1.0.2
 
-  '@coremedia/studio-client.core-icons@2404.2.0':
+  '@coremedia/studio-client.core-icons@2404.1.0':
     dependencies:
       '@jangaroo/runtime': 1.0.2
 
@@ -4846,7 +4846,7 @@ snapshots:
       '@coremedia/studio-client.client-core': 2110.2.0
       '@jangaroo/runtime': 1.0.2
 
-  '@coremedia/studio-client.main.content-hub-editor-components@2404.2.0':
+  '@coremedia/studio-client.main.content-hub-editor-components@2404.1.0':
     dependencies:
       '@coremedia/studio-client.cap-base-models': 2110.2.0
       '@coremedia/studio-client.cap-base-services-api': 2110.2.0
@@ -4912,7 +4912,7 @@ snapshots:
       '@jangaroo/runtime': 1.0.2
       rxjs: 6.6.7
 
-  '@coremedia/studio-client.main.editor-components@2404.2.0':
+  '@coremedia/studio-client.main.editor-components@2404.1.0':
     dependencies:
       '@coremedia/service-agent': 1.0.0
       '@coremedia/studio-client.app-context-models': 2110.2.0
