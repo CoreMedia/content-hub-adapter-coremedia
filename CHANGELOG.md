@@ -1,5 +1,9 @@
 Changelog
 ================================================================================
+## 2.0.3
+2401.3 CoreMedia Compatibility and Maintenance Upgrade
+* Use Java 17 SDK
+* Use Node 18.x
 
 ## 2.0.1
 - Added Content Hub Transformer
