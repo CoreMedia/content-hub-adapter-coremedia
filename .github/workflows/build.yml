@@ -12,38 +12,40 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'adopt'
           server-id: coremedia.external.releases
           server-username: PLUGINS_NEXUS_USER
           server-password: PLUGINS_NEXUS_PASSWORD
-          cache: 'maven'
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v3
+      - name: Cache Maven Repo
+        uses: actions/cache@v4
         with:
-          version: 8
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
-      - name: Setup NodeJS
+      - name: Set up NodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache-dependency-path: "studio-client/pnpm-lock.yaml"
+          node-version: 22.x
 
-      - name: Setup registry npm.coremedia.io
+      - name: Set up PNPM
         run: |
           NPM_AUTH_TOKEN=$(curl -s -H "Accept: application/json" -H "Content-Type:application/json" -X PUT --data '{"name": "${{ secrets.CM_NPM_USER }}", "password": "${{ secrets.CM_NPM_READ_ONLY_PASSWORD }}"}' https://npm.coremedia.io/-/user/org.couchdb.user:${{ secrets.CM_NPM_USER }} | jq -r .token)
           echo "::add-mask::$NPM_AUTH_TOKEN"
-          pnpm config set //npm.coremedia.io/:_authToken=$NPM_AUTH_TOKEN
-          pnpm config set @coremedia:registry=https://npm.coremedia.io
-          pnpm config set @jangaroo:registry=https://npm.coremedia.io
+          echo "NPM_CONFIG_//npm.coremedia.io/:_authToken=$NPM_AUTH_TOKEN" >> $GITHUB_ENV
+          npm install -g pnpm@latest
 
       - name: Setup Git
         if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
@@ -53,6 +55,9 @@ jobs:
 
       - name: Install PNPM Dependencies
         working-directory: studio-client
+        env:
+          NPM_CONFIG_@coremedia:registry: 'https://npm.coremedia.io'
+          NPM_CONFIG_@jangaroo:registry: 'https://npm.coremedia.io'
         run: pnpm install
 
       - name: Set Release Version

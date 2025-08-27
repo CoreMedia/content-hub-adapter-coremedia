@@ -1,7 +1,7 @@
 package com.coremedia.labs.plugins.adapters.coremedia.configuration;
 
 import com.coremedia.cap.content.ContentRepository;
-import com.coremedia.cap.undoc.common.spring.CapRepositoriesConfiguration;
+import com.coremedia.cms.uapi.config.CapRepositoriesConfiguration;
 import com.coremedia.contenthub.api.ContentHubAdapterFactory;
 import com.coremedia.contenthub.api.column.ColumnProvider;
 import com.coremedia.labs.plugins.adapters.coremedia.CoreMediaColumnProvider;
